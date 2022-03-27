@@ -1,0 +1,38 @@
+:root {
+    --purple: blueviolet; 
+}
+* {
+    text-align: center;
+}
+header {
+    margin: 10px;
+}
+header a {
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    color: var(--purple);
+    text-decoration: none;
+}
+header h3 {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--purple);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-top: 15px;
+}
+ul {
+    list-style: none;
+    padding: 5px;
+    margin: 50px;
+}
+button {
+    font-size: 18px;
+    background-color: var(--purple);
+    color: white;
+}
