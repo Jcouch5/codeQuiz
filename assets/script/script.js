@@ -1,6 +1,6 @@
 var timer = document.querySelector("#timer");
 var clear = document.querySelector('#clear');
-var start = document.querySelector('#start');
+var startEl = document.querySelector('#start');
 var questionEl = document.querySelector('#question');
 var answerchoice1 = document.querySelector('#answerbtn1');
 var answerchoice2 = document.querySelector('#answerbtn2');
@@ -9,8 +9,7 @@ var answerchoice4 = document.querySelector('#answerbtn4');
 var answerBox = document.querySelector('#answers')
 
 var timeLeft = 60;
-var countdown
-
+var counter = 0;
 var questionList = [
     {
        question: "What data type is either true or false?",
@@ -46,18 +45,29 @@ var questionList = [
      }
 ];
 
-function start(){
-    countdown = setInterval(function(){
-        timeLeft --;
-        timer.innerHTML = timeLeft;
-        // endQuiz();
+function startQuiz(){
+    
+    var countdown = setInterval(function(){
+        if (timeLeft > 0) {
+            timer.textContent = timeLeft;
+            timeLeft --;
+            console.log(timeLeft);
+        } else {
+            timer.textContent = timeLeft;
+            
+            endQuiz();
+        }
+        
+        
     }, 1000)
+    setQuestion();
 }
 function endQuiz() {
     clearInterval(countdown);
 }
+// startEl.addEventListener('click', startQuiz());
 function setQuestion(){
-    var counter = 0;
+
     if(counter > questionList.length){
         // endQuiz();
     }
@@ -66,17 +76,28 @@ function setQuestion(){
     console.log(question.question);
     questionEl.textContent = question.question;
     answerchoice1.textContent = question.choice1;
+    answerchoice1.setAttribute('value',question.choice1)
     answerchoice2.textContent = question.choice2;
+    answerchoice2.setAttribute('value',question.choice2)
     answerchoice3.textContent = question.choice3;
+    answerchoice3.setAttribute('value',question.choice3)
     answerchoice4.textContent = question.choice4;
-    counter ++;
+    answerchoice4.setAttribute('value',question.choice4)
+    console.log(counter)
 }
 function isQuestionCorrect(event) {
-var userAnswer = event.target
-console.log(userAnswer);
+    
+    var userAnswer = event.target.value
+    if(userAnswer !== questionList[counter].answer) {
+        timeLeft -= 5;
+    }
+    counter ++;
+    setQuestion();
 
 }
+
 setQuestion();
 answerBox.addEventListener('click', isQuestionCorrect);
-start.addEventListener('click', start());
+
+startEl.addEventListener('click', startQuiz())
 
