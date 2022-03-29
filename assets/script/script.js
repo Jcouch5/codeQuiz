@@ -1,6 +1,12 @@
 var timer = document.querySelector("#timer");
 var clear = document.querySelector('#clear');
 var start = document.querySelector('#start');
+var questionEl = document.querySelector('#question');
+var answerchoice1 = document.querySelector('#answerbtn1');
+var answerchoice2 = document.querySelector('#answerbtn2');
+var answerchoice3 = document.querySelector('#answerbtn3');
+var answerchoice4 = document.querySelector('#answerbtn4');
+var answerBox = document.querySelector('#answers')
 
 var timeLeft = 60;
 var countdown
@@ -48,7 +54,29 @@ function start(){
     }, 1000)
 }
 function endQuiz() {
-    
+    clearInterval(countdown);
 }
+function setQuestion(){
+    var counter = 0;
+    if(counter > questionList.length){
+        // endQuiz();
+    }
+    var question = questionList[counter];
+    console.log(question);
+    console.log(question.question);
+    questionEl.textContent = question.question;
+    answerchoice1.textContent = question.choice1;
+    answerchoice2.textContent = question.choice2;
+    answerchoice3.textContent = question.choice3;
+    answerchoice4.textContent = question.choice4;
+    counter ++;
+}
+function isQuestionCorrect(event) {
+var userAnswer = event.target
+console.log(userAnswer);
 
+}
+setQuestion();
+answerBox.addEventListener('click', isQuestionCorrect);
+start.addEventListener('click', start());
 
