@@ -7,9 +7,11 @@ var answerchoice2 = document.querySelector('#answerbtn2');
 var answerchoice3 = document.querySelector('#answerbtn3');
 var answerchoice4 = document.querySelector('#answerbtn4');
 var answerBox = document.querySelector('#answers')
+var QuestionNAnswer = document.querySelector('#qna');
 
 var timeLeft = 60;
 var counter = 0;
+var countdown;
 var questionList = [
     {
        question: "What data type is either true or false?",
@@ -47,7 +49,7 @@ var questionList = [
 
 function startQuiz(){
     
-    var countdown = setInterval(function(){
+    countdown = setInterval(function(){
         if (timeLeft > 0) {
             timer.textContent = timeLeft;
             timeLeft --;
@@ -64,16 +66,14 @@ function startQuiz(){
 }
 function endQuiz() {
     clearInterval(countdown);
-}
-// startEl.addEventListener('click', startQuiz());
-function setQuestion(){
+    QuestionNAnswer.setAttribute('class', 'hide');
 
-    if(counter > questionList.length){
-        // endQuiz();
-    }
+}
+
+function setQuestion(){
+    
+    
     var question = questionList[counter];
-    console.log(question);
-    console.log(question.question);
     questionEl.textContent = question.question;
     answerchoice1.textContent = question.choice1;
     answerchoice1.setAttribute('value',question.choice1)
@@ -83,21 +83,26 @@ function setQuestion(){
     answerchoice3.setAttribute('value',question.choice3)
     answerchoice4.textContent = question.choice4;
     answerchoice4.setAttribute('value',question.choice4)
-    console.log(counter)
+    if(counter >= questionList.length){
+        endQuiz();
+    }
 }
 function isQuestionCorrect(event) {
     
     var userAnswer = event.target.value
     if(userAnswer !== questionList[counter].answer) {
         timeLeft -= 5;
+        if(timeLeft === 0){
+            endQuiz();
+        }
     }
     counter ++;
     setQuestion();
 
 }
 
-setQuestion();
+startQuiz();
 answerBox.addEventListener('click', isQuestionCorrect);
 
-startEl.addEventListener('click', startQuiz())
+// startEl.addEventListener('click', startQuiz)
 

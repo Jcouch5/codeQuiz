@@ -32,3 +32,6 @@ button {
     background-color: var(--purple);
     color: white;
 }
+.hide {
+    display: none;
+}
