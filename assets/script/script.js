@@ -58,7 +58,6 @@ function startQuiz(){
         if (timeLeft > 0) {
             timer.textContent = timeLeft;
             timeLeft --;
-            console.log(timeLeft);
         } else {
             timer.textContent = timeLeft;
             
