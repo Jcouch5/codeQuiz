@@ -11,6 +11,7 @@ var QuestionNAnswer = document.querySelector('#qna');
 var saveHighscore = document.querySelector('#save');
 var initials = document.querySelector('#initials');
 var submitScore = document.querySelector('#submitHighscore');
+let scores = JSON.parse(localStorage.getItem('highscore')) || [];
 
 
 var timeLeft = 60;
@@ -108,8 +109,13 @@ function isQuestionCorrect(event) {
 function save () {
     var savedInitials = initials.value.trim();
     highscore = timeLeft;
-    localStorage.setItem('highscore',highscore);
-    localStorage.setItem('initials', savedInitials);
+    scores.push({
+        'highscore': highscore,
+        'initials': savedInitials
+    })
+
+    localStorage.setItem('highscore',JSON.stringify(scores));
+   
 }
 
 startQuiz();
